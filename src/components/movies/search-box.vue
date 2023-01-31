@@ -13,7 +13,7 @@ export default {
 };
 </script>
 <template>
-    <div class="bg-gray rounded py-4 px-20 flex justify-between items-center">
+    <div class="bg-gray rounded py-4 px-20 flex justify-between items-center mb-20">
         <div>
             <label>Search by release date: </label>
             <Datepicker v-model="date" class="ml-2 inline-flex" range auto-apply :clearable="false"

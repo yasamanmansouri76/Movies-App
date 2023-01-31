@@ -9,7 +9,7 @@ export default {
 
 <template>
   <layout />
-  <div class="container mx-auto px-12">
+  <div class="container mx-auto px-16">
     <router-view />
   </div>
 </template>

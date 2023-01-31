@@ -9,6 +9,7 @@ module.exports = {
         },
         gray: {
           DEFAULT: "#E2E2E2",
+          light: "#F1F1F1",
         },
         blue: {
           DEFAULT: "#549DF2",
