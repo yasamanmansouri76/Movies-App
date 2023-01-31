@@ -5,11 +5,18 @@ export default {
     name: "MoviesListComponent",
     components: {
         movieCard
+    },
+    props: {
+        movies: {
+            required: true,
+            type: Array,
+            default: () => [],
+        }
     }
 };
 </script>
 <template>
     <div class="grid grid-cols-3 gap-y-14 gap-x-20">
-        <movie-card />
+        <movie-card v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
 </template>

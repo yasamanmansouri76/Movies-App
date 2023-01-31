@@ -1,18 +1,40 @@
 <script lang="ts">
+import { mapGetters } from "vuex";
+
 export default {
-    name: "MovieCardComponent"
+    name: "MovieCardComponent",
+    props: {
+        movie: {
+            required: true,
+            type: Object,
+            default: () => { },
+        }
+    },
+    computed: {
+        ...mapGetters({
+            genres: "movies/genres",
+        }),
+    },
+    methods: {
+        getGenreName(genreId: number) {
+            // console.log(this.genres);
+            const genre = this.genres.find((item: object) => item.id === genreId);
+            if (genre) {
+                return genre.name;
+            }
+        }
+    }
 };
 </script>
 <template>
     <div class="bg-gray-light border-2 border-gray-300 rounded flex movie-card">
-        <img src="../../assets/vue.svg" class="rounded-l">
+        <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="rounded-l">
         <div class="right-details p-3 flex flex-col justify-between ">
-            <h1 class="text-lg font-bold">title</h1>
+            <h1 class="text-lg font-bold">{{ movie.title }}</h1>
             <div class="text-xs">
-                <span class="block mb-3">2014-11-08</span>
+                <span class="block mb-3">{{ movie.release_date }}</span>
                 <div>
-                    <span>test</span> --
-                    <span>test</span>
+                    <span v-for="(genre, index) in movie.genre_ids" :key="index">{{ getGenreName(genre) }} * </span>
                 </div>
             </div>
         </div>

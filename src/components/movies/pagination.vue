@@ -1,16 +1,28 @@
 <script lang="ts">
 export default {
-    name: "PaginationComponent"
+    name: "PaginationComponent",
+    props: {
+        page: {
+            required: true,
+            type: Number,
+            default: '',
+        },
+        totalPages: {
+            required: true,
+            type: Number,
+            default: '',
+        }
+    }
 };
 </script>
 <template>
     <div class="text-center">
-        <span>
+        <button :class="page === 1 ? 'disabled text-gray' : 'text-blue'" @click="$emit('prevPage')">
             Previous Page
-        </span>
+        </button>
         <span class="text-2xl mx-3">|</span>
-        <span>
+        <button :class="page === totalPages ? 'disabled text-gray' : 'text-blue'" @click="$emit('nextPage')">
             Next Page
-        </span>
+        </button>
     </div>
 </template>
