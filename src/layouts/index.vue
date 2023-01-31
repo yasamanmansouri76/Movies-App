@@ -4,11 +4,11 @@ export default {
 };
 </script>
 <template>
-    <nav class="bg-green my-nav"></nav>
+    <nav class="bg-green my-nav mb-14"></nav>
 </template>
 <style lang="scss" scoped>
-    .my-nav{
-        height: 48px;
-    }
+.my-nav {
+    height: 48px;
+}
 </style>
 
