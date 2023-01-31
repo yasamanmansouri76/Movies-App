@@ -8,9 +8,10 @@ export default createRouter({
       path: "/",
       component: Home,
     },
-    // {
-    //   path: '/about',
-    //   component: () => import('@/views/About.vue'),
-    // },
+    {
+      path: "/movie/:id",
+      name: "movieDetails",
+      component: () => import("./pages/movies/_id.vue"),
+    },
   ],
 });
