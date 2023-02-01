@@ -25,12 +25,17 @@ export default {
             return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
         },
         calculateRuntime(time: number) {
-            const completeTime = time / 60;
-            const hour = completeTime.toString().split('.')[0];
-            let minutes = completeTime.toString().split('.')[1].substring(0, 2);
-            minutes = +(`0.${minutes}`);
-            minutes = minutes * 60;
-            return [+(hour), Math.floor(minutes)]
+            if (time > 0) {
+                const completeTime = time / 60;
+                const hour = completeTime.toString().split('.')[0];
+                let minutes = completeTime.toString().split('.')[1].substring(0, 2);
+                minutes = +(`0.${minutes}`);
+                minutes = minutes * 60;
+                return [+(hour), Math.floor(minutes)];
+            } else {
+                return time;
+            }
+
         }
     }
 }
