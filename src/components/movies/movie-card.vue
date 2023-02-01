@@ -1,9 +1,15 @@
 <script lang="ts">
 import { mapGetters } from "vuex";
 import { CalendarIcon } from '@heroicons/vue/24/solid'
+import constants from "../../constants/index";
 
 export default {
     name: "MovieCardComponent",
+    data() {
+        return {
+            constants: constants
+        }
+    },
     props: {
         movie: {
             required: true,
@@ -32,7 +38,7 @@ export default {
 <template>
     <router-link :to="{ name: 'movieDetails', params: { id: movie.id } }">
         <div class="bg-gray-light border-2 border-gray-300 rounded flex movie-card hover:shadow-xl">
-            <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="rounded-l">
+            <img :src="constants.IMG_BASE_URL + movie.poster_path" class="rounded-l">
             <div class="right-details p-3 flex flex-col justify-between ">
                 <h1 class="text-lg font-bold">{{ movie.title }}</h1>
                 <div class="text-xs">

@@ -1,6 +1,13 @@
 <script lang="ts">
+import constants from "../../constants/index";
+
 export default {
     name: "DetailSectionComponent",
+    data() {
+        return {
+            constants: constants
+        }
+    },
     props: {
         movie: {
             required: true,
@@ -31,7 +38,7 @@ export default {
 <template>
     <div class="details-section">
         <div class="flex">
-            <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="rounded-lg shadow-xl" />
+            <img :src="constants.IMG_BASE_URL + movie.poster_path" class="rounded-lg shadow-xl" />
             <div class="right-details p-10">
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Budget</span>
@@ -64,7 +71,7 @@ export default {
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">IMDB Link</span>
-                    <a :href="`https://www.imdb.com/title/${movie.imdb_id}/`">Link</a>
+                    <a :href="constants.IMDB_BASE_URL + movie.imdb_id">Link</a>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Homepage Link</span>
