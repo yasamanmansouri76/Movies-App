@@ -42,11 +42,11 @@ export default {
             <div class="right-details p-10">
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Budget</span>
-                    <span>${{ movie.budget ?? formatNumber(movie.budget) }}</span>
+                    <span>${{ formatNumber(movie.budget) }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Revenue</span>
-                    <span>${{ movie.revenue ?? formatNumber(movie.revenue) }}</span>
+                    <span>${{ formatNumber(movie.revenue) }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Release Date</span>
