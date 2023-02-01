@@ -14,7 +14,9 @@ export default {
             page: 1,
             totalPages: 0,
             totalResults: 0,
-            loadingMovies: true
+            loadingMovies: true,
+            releaseStartDate: '',
+            releaseEndDate: ''
         }
     },
     components: {
@@ -35,7 +37,9 @@ export default {
         loadMovies() {
             this.loadingMovies = true;
             const payload = {
-                page: this.page
+                page: this.page,
+                // primary_release_date.gte: this.releaseStartDate,
+                // primary_release_date.lte: this.releaseEndDate
             }
             this.getMovies(payload)
                 .then((response) => {
@@ -46,6 +50,13 @@ export default {
         },
         loadGenres() {
             this.getGenres();
+        },
+        filterMovies(date: Array) {
+            const startDate = date[0].toLocaleDateString("en-US").split('/').join('-');
+            const endDate = date[1].toLocaleDateString("en-US").split('/').join('-');
+            this.releaseStartDate = `${startDate.split('-')[2]}-${startDate.split('-')[0]}-${startDate.split('-')[1]}`;
+            this.releaseEndDate = `${endDate.split('-')[2]}-${endDate.split('-')[0]}-${endDate.split('-')[1]}`;
+
         },
         nextPage() {
             this.page++;
@@ -60,7 +71,7 @@ export default {
 </script>
 <template>
     <div>
-        <searchBox />
+        <searchBox @filter="filterMovies" />
         <loading v-if="loadingMovies" />
         <movies-list v-else :movies="movies" />
         <pagination class="mt-28" :page="page" :total-pages="totalPages" @next-page="nextPage" @prev-page="prevPage" />

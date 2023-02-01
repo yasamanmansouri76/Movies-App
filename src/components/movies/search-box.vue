@@ -19,7 +19,7 @@ export default {
             <Datepicker v-model="date" class="ml-2 inline-flex" range auto-apply :clearable="false"
                 :enable-time-picker="false" />
         </div>
-        <button class="rounded-full bg-blue text-white px-2 py-1">Search</button>
+        <button class="rounded-full bg-blue text-white px-2 py-1" @click="$emit('filter', date)">Search</button>
     </div>
 </template>
 <style lang="scss" scoped>
