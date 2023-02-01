@@ -23,6 +23,18 @@ export default {
         })
         .then((response) => response.data);
     },
+    getMovieDetails(context: object, payload: object) {
+      return api
+        .get(`/movie/${payload}?api_key=612ccb541a136afca339984ccf0f91e9`)
+        .then((response) => response.data);
+    },
+    getMovieCredits(context: object, payload: object) {
+      return api
+        .get(
+          `/movie/${payload}/credits?api_key=612ccb541a136afca339984ccf0f91e9`
+        )
+        .then((response) => response.data);
+    },
     getGenres(context: object, payload: object) {
       return api
         .get("/genre/movie/list?api_key=612ccb541a136afca339984ccf0f91e9")

@@ -1,61 +1,87 @@
 <script lang="ts">
 export default {
-    name: "DetailSectionComponent"
+    name: "DetailSectionComponent",
+    props: {
+        movie: {
+            required: true,
+            type: Object,
+            default: () => { },
+        },
+        credits: {
+            required: true,
+            type: Array,
+            default: () => [],
+        }
+    },
+    methods: {
+        formatNumber(num: number) {
+            return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+        },
+        calculateRuntime(time: number) {
+            const completeTime = time / 60;
+            const hour = completeTime.toString().split('.')[0];
+            let minutes = completeTime.toString().split('.')[1].substring(0, 2);
+            minutes = +(`0.${minutes}`);
+            minutes = minutes * 60;
+            return [+(hour), Math.floor(minutes)]
+        }
+    }
 }
 </script>
 <template>
     <div class="details-section">
         <div class="flex">
-            <img class="rounded-lg shadow-xl" src="../../assets/vue.svg" />
+            <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="rounded-lg shadow-xl" />
             <div class="right-details p-10">
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Budget</span>
-                    <span>10000000</span>
+                    <span>${{ movie.budget ?? formatNumber(movie.budget) }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Revenue</span>
-                    <span>10000000</span>
+                    <span>${{ movie.revenue ?? formatNumber(movie.revenue) }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Release Date</span>
-                    <span>10000000</span>
+                    <span>{{ movie.release_date }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Runtime</span>
-                    <span>10000000</span>
+                    <span>{{ calculateRuntime(movie.runtime)[0] }}h, {{ calculateRuntime(movie.runtime)[1] }}m</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Score</span>
-                    <span>10000000</span>
+                    <span>{{ movie.vote_average }} ({{ movie.vote_count }} votes)</span>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Genres</span>
-                    <span>10000000</span>
+                    <div>
+                        <span v-for="(genre, index) in movie.genres" :key="index">
+                            {{ genre.name }}
+                            <span v-show="index < movie.genres.length - 1">, </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">IMDB Link</span>
-                    <span>10000000</span>
+                    <a :href="`https://www.imdb.com/title/${movie.imdb_id}/`">Link</a>
                 </div>
                 <div class="flex justify-between items-center mb-5">
                     <span class="font-bold">Homepage Link</span>
-                    <span>10000000</span>
+                    <a :href="movie.homepage">Link</a>
                 </div>
             </div>
         </div>
         <p class="text-sm mt-10">
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-            Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
-            assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait
-            que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-            soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des
-            passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de
-            texte, comme Aldus PageMaker
+            {{ movie.overview }}
         </p>
         <h5 class="font-bold mt-20 mb-1">Credit:</h5>
-        <p class="text-sm">
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-            Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
-            assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait
+        <p class="text-sm mb-20">
+            <span v-for="(credit, index) in credits" :key="index">
+                <span v-show="index < 10">{{ credit.name }} </span>
+                <span v-show="index < 9">, </span>
+            </span>
+            <span v-show="credits.length > 10"> and {{ credits.length - 10 }} more. </span>
         </p>
     </div>
 
@@ -70,6 +96,10 @@ export default {
 
     .right-details {
         width: 70%;
+    }
+
+    a {
+        color: blue;
     }
 }
 </style>
