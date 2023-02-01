@@ -18,29 +18,23 @@ export default {
   actions: {
     getMovies(context: object, payload: object) {
       return api
-        .get("/discover/movie?api_key=612ccb541a136afca339984ccf0f91e9", {
+        .get("/discover/movie", {
           params: payload,
         })
         .then((response) => response.data);
     },
     getMovieDetails(context: object, payload: object) {
-      return api
-        .get(`/movie/${payload}?api_key=612ccb541a136afca339984ccf0f91e9`)
-        .then((response) => response.data);
+      return api.get(`/movie/${payload}`).then((response) => response.data);
     },
     getMovieCredits(context: object, payload: object) {
       return api
-        .get(
-          `/movie/${payload}/credits?api_key=612ccb541a136afca339984ccf0f91e9`
-        )
+        .get(`/movie/${payload}/credits`)
         .then((response) => response.data);
     },
     getGenres(context: object, payload: object) {
-      return api
-        .get("/genre/movie/list?api_key=612ccb541a136afca339984ccf0f91e9")
-        .then((response) => {
-          context.commit("setGenres", response.data.genres);
-        });
+      return api.get("/genre/movie/list").then((response) => {
+        context.commit("setGenres", response.data.genres);
+      });
     },
   },
 };

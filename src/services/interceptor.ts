@@ -1,12 +1,15 @@
 import axios from "axios";
+import constants from "../constants/index";
 
 const api = axios.create({
-  baseURL: `https://api.themoviedb.org/3/`,
+  baseURL: constants.BASE_URL,
   withCredentials: false,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: "Bearer 612ccb541a136afca339984ccf0f91e9",
+  },
+  params: {
+    api_key: constants.API_KEY,
   },
 });
 
