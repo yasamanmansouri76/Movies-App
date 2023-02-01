@@ -6,12 +6,12 @@ export default {
     genres: [],
   },
   getters: {
-    genres(state: object) {
+    genres(state: any) {
       return state.genres;
     },
   },
   mutations: {
-    setGenres(state: object, data: any) {
+    setGenres(state: any, data: any) {
       state.genres = data;
     },
   },
@@ -31,7 +31,7 @@ export default {
         .get(`/movie/${payload}/credits`)
         .then((response) => response.data);
     },
-    getGenres(context: object, payload: object) {
+    getGenres(context: any, payload: object) {
       return api.get("/genre/movie/list").then((response) => {
         context.commit("setGenres", response.data.genres);
       });
