@@ -1,5 +1,10 @@
 <script lang="ts">
 import constants from "../../constants/index";
+import type { PropType } from 'vue';
+
+interface Credit {
+    name: string
+}
 
 export default {
     name: "DetailSectionComponent",
@@ -17,7 +22,7 @@ export default {
         },
         credits: {
             required: true,
-            type: Array,
+            type: Array as PropType<Array<Credit>>,
             default: () => [],
         }
     },
@@ -36,7 +41,6 @@ export default {
             } else {
                 return time;
             }
-
         }
     }
 }
