@@ -40,7 +40,10 @@ export default {
                         <calendar-icon class="h-4 w-4 mr-1" />
                         {{ movie.release_date }}</span>
                     <div>
-                        <span v-for="(genre, index) in movie.genre_ids" :key="index">{{ getGenreName(genre) }} • </span>
+                        <span v-for="(genre, index) in movie.genre_ids" :key="index">
+                            {{ getGenreName(genre) }}
+                            <span v-show="index < movie.genre_ids.length - 1">• </span>
+                        </span>
                     </div>
                 </div>
             </div>
