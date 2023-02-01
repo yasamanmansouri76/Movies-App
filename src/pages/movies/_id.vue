@@ -3,6 +3,7 @@
 import { mapActions } from "vuex";
 import detailHeader from "../../components/movies/detail-header.vue";
 import detailSection from "../../components/movies/detail-section.vue";
+import loading from "../../components/shared/loading.vue";
 
 export default {
     name: "MovieDetailsComponent",
@@ -10,12 +11,14 @@ export default {
         return {
             movieId: this.$route.params.id,
             movie: {},
-            credits: []
+            credits: [],
+            loadingDetails: true
         }
     },
     components: {
         detailHeader,
-        detailSection
+        detailSection,
+        loading
     },
     beforeMount() {
         this.loadMovieDetails();
@@ -26,9 +29,11 @@ export default {
             getMovieCredits: "movies/getMovieCredits"
         }),
         loadMovieDetails() {
+            this.loadingDetails = true;
             this.getMovieDetails(this.movieId)
                 .then((response) => {
                     this.movie = response;
+                    this.loadingDetails = false;
                 })
             this.getMovieCredits(this.movieId)
                 .then((response) => {
@@ -39,7 +44,8 @@ export default {
 }
 </script>
 <template>
-    <div>
+    <loading v-if="loadingDetails" />
+    <div v-else>
         <detail-header :movie="movie" />
         <detail-section :movie="movie" :credits="credits" />
     </div>
