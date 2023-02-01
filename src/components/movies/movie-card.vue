@@ -1,5 +1,6 @@
 <script lang="ts">
 import { mapGetters } from "vuex";
+import { CalendarIcon } from '@heroicons/vue/24/solid'
 
 export default {
     name: "MovieCardComponent",
@@ -15,9 +16,11 @@ export default {
             genres: "movies/genres",
         }),
     },
+    components: {
+        CalendarIcon
+    },
     methods: {
         getGenreName(genreId: number) {
-            // console.log(this.genres);
             const genre = this.genres.find((item: object) => item.id === genreId);
             if (genre) {
                 return genre.name;
@@ -33,9 +36,11 @@ export default {
             <div class="right-details p-3 flex flex-col justify-between ">
                 <h1 class="text-lg font-bold">{{ movie.title }}</h1>
                 <div class="text-xs">
-                    <span class="block mb-3">{{ movie.release_date }}</span>
+                    <span class="flex items-center mb-3">
+                        <calendar-icon class="h-4 w-4 mr-1" />
+                        {{ movie.release_date }}</span>
                     <div>
-                        <span v-for="(genre, index) in movie.genre_ids" :key="index">{{ getGenreName(genre) }} * </span>
+                        <span v-for="(genre, index) in movie.genre_ids" :key="index">{{ getGenreName(genre) }} • </span>
                     </div>
                 </div>
             </div>

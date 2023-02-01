@@ -1,4 +1,6 @@
 <script lang="ts">
+import { ArrowLeftIcon } from '@heroicons/vue/24/solid'
+
 export default {
     name: "DetailHeaderComponent",
     props: {
@@ -7,12 +9,16 @@ export default {
             type: Object,
             default: () => { },
         }
+    },
+    components: {
+        ArrowLeftIcon
     }
 }
 </script>
 <template>
     <div class="bg-gray rounded py-4 px-20 flex items-center mb-20">
-        <router-link class="rounded-full bg-blue text-white px-2 py-1" :to="{ name: 'moviesList' }">
+        <router-link class="rounded-full bg-blue text-white px-3 py-1 flex items-center" :to="{ name: 'moviesList' }">
+            <arrow-left-icon class="h-4 w-4 mr-1" />
             Back
         </router-link>
         <div class="ml-12">
