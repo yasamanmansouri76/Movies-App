@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         getGenreName(genreId: number) {
-            const genre = this.genres.find((item: object) => item.id === genreId);
+            const genre = this.genres.find((item: any) => item.id === genreId);
             if (genre) {
                 return genre.name;
             }

@@ -52,7 +52,7 @@ export default {
         loadGenres() {
             this.getGenres();
         },
-        filterMovies(date: Array) {
+        filterMovies(date: any) {
             this.releaseStartDate = new Date(date[0]).toISOString().slice(0, 10);
             this.releaseEndDate = new Date(date[1]).toISOString().slice(0, 10);
             this.loadMovies()

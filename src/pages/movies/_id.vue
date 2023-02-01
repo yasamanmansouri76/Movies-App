@@ -37,7 +37,7 @@ export default {
                 })
             this.getMovieCredits(this.movieId)
                 .then((response) => {
-                    this.credits = response.cast.sort((a: object, b: object) => b.popularity - a.popularity);
+                    this.credits = response.cast.sort((a: any, b: any) => b.popularity - a.popularity);
                 })
         }
     }
