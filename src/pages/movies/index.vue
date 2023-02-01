@@ -36,10 +36,11 @@ export default {
         }),
         loadMovies() {
             this.loadingMovies = true;
+
             const payload = {
                 page: this.page,
-                // primary_release_date.gte: this.releaseStartDate,
-                // primary_release_date.lte: this.releaseEndDate
+                'primary_release_date.lte': this.releaseEndDate,
+                'primary_release_date.gte': this.releaseStartDate
             }
             this.getMovies(payload)
                 .then((response) => {
@@ -52,10 +53,9 @@ export default {
             this.getGenres();
         },
         filterMovies(date: Array) {
-            const startDate = date[0].toLocaleDateString("en-US").split('/').join('-');
-            const endDate = date[1].toLocaleDateString("en-US").split('/').join('-');
-            this.releaseStartDate = `${startDate.split('-')[2]}-${startDate.split('-')[0]}-${startDate.split('-')[1]}`;
-            this.releaseEndDate = `${endDate.split('-')[2]}-${endDate.split('-')[0]}-${endDate.split('-')[1]}`;
+            this.releaseStartDate = new Date(date[0]).toISOString().slice(0, 10);
+            this.releaseEndDate = new Date(date[1]).toISOString().slice(0, 10);
+            this.loadMovies()
 
         },
         nextPage() {
@@ -73,6 +73,7 @@ export default {
     <div>
         <searchBox @filter="filterMovies" />
         <loading v-if="loadingMovies" />
+        <span v-else-if="movies.length <= 0" class="block text-center">No movie was found!</span>
         <movies-list v-else :movies="movies" />
         <pagination class="mt-28" :page="page" :total-pages="totalPages" @next-page="nextPage" @prev-page="prevPage" />
         <p class="mt-8 text-center pb-16 text-gray-500">Showing results {{ page }} - {{ totalPages }}</p>

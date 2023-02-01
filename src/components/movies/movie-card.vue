@@ -62,6 +62,7 @@ export default {
         width: 40%;
         height: 100%;
         object-fit: cover;
+        height: 245px;
     }
 
     .right-details {
